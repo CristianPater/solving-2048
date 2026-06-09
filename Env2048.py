@@ -50,8 +50,9 @@ class Env:
             self.merge()
             self.board = np.rot90(self.board, 1)
 
-
-        if not any(self.valid(a) for a in [self.UP, self.DOWN, self.LEFT, self.RIGHT]):
+        if np.all(self.board != 0):
+            self.done = True
+        elif not any(self.valid(a) for a in [self.UP, self.DOWN, self.LEFT, self.RIGHT]):
             self.done = True
         else:
             self.generate_tile()
@@ -96,7 +97,6 @@ class Env:
                     return True
 
         return False
-
 
 
 
